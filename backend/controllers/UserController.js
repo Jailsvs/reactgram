@@ -53,7 +53,6 @@ const register = async (req, res) => {
 // Get logged in user
 const getCurrentUser = async (req, res) => {
   const user = req.user;
-
   res.status(200).json(user);
 };
 
@@ -87,12 +86,11 @@ const login = async (req, res) => {
 const update = async (req, res) => {
   const { name, password, bio } = req.body;
   let profileImage = null;
-
   if (req.file) {
     profileImage = req.file.filename;
   }
-
   const reqUser = req.user;
+
   const user = await User.findById(mongoose.Types.ObjectId(reqUser._id)).select(
     "-password"
   );
@@ -118,7 +116,6 @@ const update = async (req, res) => {
 // Get user by id
 const getUserById = async (req, res) => {
   const { id } = req.params;
-
   try
   {
     const user = await User.findById(mongoose.Types.ObjectId(id)).select(
