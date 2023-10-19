@@ -15,15 +15,21 @@ const userCreateValidation = () => {
     body("password")
       .isString()
       .withMessage("A senha é obrigatória.")
+      .custom((value, { req }) => {
+        if (value === "") 
+          throw new Error("A senha é obrigatória.");
+        return true;
+      })
       .isLength({ min: 5 })
       .withMessage("A senha precisa de no mínimo 5 caracteres."),
     body("confirmPassword")
       .isString()
       .withMessage("A confirmação de senha é obrigatória.")
       .custom((value, { req }) => {
-        if (value != req.body.password) {
+        if (value === "") 
+          throw new Error("A confirmação de senha é obrigatória.");
+        if (value != req.body.password) 
           throw new Error("As senhas não são iguais.");
-        }
         return true;
       }),
   ];
