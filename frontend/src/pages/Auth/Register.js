@@ -2,6 +2,7 @@ import './Auth.css'
 
 //components
 import {Link} from "react-router-dom";
+import Message from '../../components/Message';
 //hooks
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -46,7 +47,9 @@ const Register = () => {
         <input type="email" placeholder='E-mail' onChange={(e) => setEmail(e.target.value)} value={email || ""}/>
         <input type="password" placeholder='Senha' onChange={(e) => setPassword(e.target.value)} value={password || ""}/>
         <input type="password" placeholder='Confirme a senha' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword || ""}/>
-        <input type="submit" value="Cadastrar" />
+        {!loading && <input type="submit" value="Cadastrar" />}
+        {loading && <input type="submit" value="Aguarde..." disabled/>}
+        {error && <Message msg={error} type="error" />}
       </form>
       <p>
         Já possui uma conta? <Link to="/login">Clique aqui!</Link>
