@@ -23,8 +23,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout);
-    dispatch(reset);
+    dispatch(logout());
+    dispatch(reset());
 
     navigate("/login");
   }
