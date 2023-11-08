@@ -90,8 +90,7 @@ const update = async (req, res) => {
     profileImage = req.file.filename;
   }
   const reqUser = req.user;
-
-  const user = await User.findById(mongoose.Types.ObjectId(reqUser._id)).select(
+  const user = await User.findById(reqUser._id).select(
     "-password"
   );
   if (name) {

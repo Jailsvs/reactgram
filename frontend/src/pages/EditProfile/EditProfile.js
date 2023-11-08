@@ -35,8 +35,6 @@ const EditProfile = () => {
     }
   }, [user])
 
-  console.log(user);
-
   const handleFile = (e) => {
     //image preview
     const image = e.target.files[0];
@@ -62,7 +60,8 @@ const EditProfile = () => {
     const userFormData = Object.keys(userData)
                             .forEach((key) => formData.append(key, userData[key]));
     
-    formData.append("user", userFormData);
+    //formData.append("user", userFormData);
+
     await dispatch(updateProfile(formData));
 
     setTimeout(() => {
