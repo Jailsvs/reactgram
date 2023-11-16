@@ -31,12 +31,8 @@ export const getUserPhotos = createAsyncThunk(
   "photo/userphotos",
   async (id, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
-
     const data = await photoService.getUserPhotos(id, token);
-
     console.log(data);
-    console.log(data.errors);
-
     return data;
   }
 );
