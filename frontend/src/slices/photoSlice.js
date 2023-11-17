@@ -175,17 +175,15 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.error = null;
-
         state.photos = state.photos.filter((photo) => {
           return photo._id !== action.payload.id;
         });
-
         state.message = action.payload.message;
       })
       .addCase(deletePhoto.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.photo = null;
+        state.photo = {};
       })
       .addCase(updatePhoto.pending, (state) => {
         state.loading = true;
@@ -195,14 +193,12 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.error = null;
-
         state.photos.map((photo) => {
           if (photo._id === action.payload.photo._id) {
             return (photo.title = action.payload.photo.title);
           }
           return photo;
         });
-
         state.message = action.payload.message;
       })
       .addCase(updatePhoto.rejected, (state, action) => {
@@ -214,18 +210,15 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.error = null;
-
         if (state.photo.likes) {
           state.photo.likes.push(action.payload.userId);
         }
-
         state.photos.map((photo) => {
           if (photo._id === action.payload.photoId) {
             return photo.likes.push(action.payload.userId);
           }
           return photo;
         });
-
         state.message = action.payload.message;
       })
       .addCase(like.rejected, (state, action) => {
@@ -236,9 +229,7 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.error = null;
-
         state.photo.comments.push(action.payload.comment);
-
         state.message = action.payload.message;
       })
       .addCase(comment.rejected, (state, action) => {
