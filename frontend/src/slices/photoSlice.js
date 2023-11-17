@@ -48,13 +48,11 @@ export const deletePhoto = createAsyncThunk(
   "photo/delete",
   async (id, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
-
     const data = await photoService.deletePhoto(id, token);
     console.log(data.errors);
     // Check for errors
-    if (data.errors) {
+    if (data.errors) 
       return thunkAPI.rejectWithValue(data.errors[0]);
-    }
     return data;
   }
 );
@@ -64,17 +62,14 @@ export const updatePhoto = createAsyncThunk(
   "photo/update",
   async (photoData, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
-
     const data = await photoService.updatePhoto(
       { title: photoData.title },
       photoData.id,
       token
     );
-
     // Check for errors
-    if (data.errors) {
+    if (data.errors) 
       return thunkAPI.rejectWithValue(data.errors[0]);
-    }
     return data;
   }
 );
@@ -82,13 +77,10 @@ export const updatePhoto = createAsyncThunk(
 // Like a photo
 export const like = createAsyncThunk("photo/like", async (id, thunkAPI) => {
   const token = thunkAPI.getState().auth.user.token;
-
   const data = await photoService.like(id, token);
-
   // Check for errors
-  if (data.errors) {
+  if (data.errors) 
     return thunkAPI.rejectWithValue(data.errors[0]);
-  }
   return data;
 });
 
@@ -97,17 +89,14 @@ export const comment = createAsyncThunk(
   "photo/comment",
   async (photoData, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
-
     const data = await photoService.comment(
       { comment: photoData.comment },
       photoData.id,
       token
     );
-
     // Check for errors
-    if (data.errors) {
+    if (data.errors) 
       return thunkAPI.rejectWithValue(data.errors[0]);
-    }
     return data;
   }
 );
@@ -123,7 +112,6 @@ export const searchPhotos = createAsyncThunk(
   "photo/search",
   async (query, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
-
     const data = await photoService.searchPhotos(query, token);
     console.log(data);
     console.log(data.errors);
