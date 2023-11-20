@@ -67,7 +67,6 @@ export const updatePhoto = createAsyncThunk(
       photoData.id,
       token
     );
-    // Check for errors
     if (data.errors) 
       return thunkAPI.rejectWithValue(data.errors[0]);
     return data;
@@ -204,7 +203,7 @@ export const photoSlice = createSlice({
       .addCase(updatePhoto.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.photo = null;
+        state.photo = {};
       })
       .addCase(like.fulfilled, (state, action) => {
         state.loading = false;
