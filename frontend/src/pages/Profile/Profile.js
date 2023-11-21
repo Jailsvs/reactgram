@@ -53,7 +53,6 @@ const Profile = () => {
 
   const submitHandle = async (e) => {
     e.preventDefault();
-
     const photoData = {
       title, image
     }
@@ -79,7 +78,11 @@ const Profile = () => {
 
   const handleUpdatePhoto = (e) => {
     e.preventDefault();
-    dispatch(updatePhoto(editId));
+    const photoData = {
+      title: editTitle,
+      id: editId
+    };
+    dispatch(updatePhoto(photoData));
     resetComponenteMessage();
   }
 
@@ -141,9 +144,8 @@ const Profile = () => {
                         onChange={(e) => setEditTitle(e.target.value)}
                         value={editTitle || ""}/> 
                   <input type="submit" value="Atualizar" />
-                  <button className='cancel-btn' 
-                          onClick={handleCancelEditPhoto}>
-                            Cancelar edição
+                  <button className="cancel-btn" onClick={handleCancelEditPhoto}>
+                    Cancelar edição
                   </button>
                 </form>
           </div>
