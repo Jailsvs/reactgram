@@ -10,14 +10,17 @@ import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useResetComponentMessage } from '../../hooks/useResetComponentMessage';
 
 //redux
 import { getUserDetails } from '../../slices/userSlice';
-import { publishPhoto, resetMessage, getUserPhotos, deletePhoto, updatePhoto } from '../../slices/photoSlice';
+import { publishPhoto, getUserPhotos, deletePhoto, updatePhoto } from '../../slices/photoSlice';
 
 const Profile = () => {
   const {id} = useParams();
   const dispatch = useDispatch();
+  const resetMessage = useResetComponentMessage(dispatch);
+
   const {user, loading} = useSelector((state) => state.user);
   const {user: userAuth} = useSelector((state) => state.auth); 
   const { photos, loading: loadingPhoto, 
@@ -39,11 +42,6 @@ const Profile = () => {
     dispatch(getUserPhotos(id));
   }, [dispatch, id])
 
-  const resetComponenteMessage = () => {
-    setTimeout(() => {
-      dispatch(resetMessage());
-    }, 2000);
-  }
   
   const handleFile = (e) => {
     //image preview
@@ -63,7 +61,7 @@ const Profile = () => {
     formData.append("photo", photoFormData);                          
     await dispatch(publishPhoto(formData));
     setTitle("");
-    resetComponenteMessage();
+    resetMessage();
   }
 
   const hideOrShowForms = () => {
@@ -73,7 +71,7 @@ const Profile = () => {
 
   const handleDeletePhoto = (id) => {
     dispatch(deletePhoto(id));
-    resetComponenteMessage();
+    resetMessage();
   }
 
   const handleUpdatePhoto = (e) => {
@@ -83,7 +81,7 @@ const Profile = () => {
       id: editId
     };
     dispatch(updatePhoto(photoData));
-    resetComponenteMessage();
+    resetMessage();
   }
 
   const handleEditPhoto = (photo) => {
