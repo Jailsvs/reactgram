@@ -32,7 +32,6 @@ export const getUserPhotos = createAsyncThunk(
   async (id, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
     const data = await photoService.getUserPhotos(id, token);
-    console.log(data);
     return data;
   }
 );
@@ -113,7 +112,6 @@ export const searchPhotos = createAsyncThunk(
   async (query, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
     const data = await photoService.searchPhotos(query, token);
-    console.log(data);
     console.log(data.errors);
     return data;
   }
@@ -161,7 +159,6 @@ export const photoSlice = createSlice({
         state.error = null;
       })
       .addCase(getPhoto.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
         state.success = true;
         state.error = null;
@@ -241,7 +238,6 @@ export const photoSlice = createSlice({
         state.error = null;
       })
       .addCase(getPhotos.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
         state.success = true;
         state.error = null;
@@ -252,7 +248,6 @@ export const photoSlice = createSlice({
         state.error = null;
       })
       .addCase(searchPhotos.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
         state.success = true;
         state.error = null;
